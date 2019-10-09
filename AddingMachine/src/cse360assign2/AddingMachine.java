@@ -7,8 +7,10 @@
  * 				track of the total objects created and can clear the objects.
  */
 
-
 package cse360assign2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddingMachine {
 	
@@ -17,12 +19,19 @@ public class AddingMachine {
 	 */
 	private int total;
 	
+	/**
+	 * Array List that will keep track of the history of the parameters.
+	 */
+	private List <String> history = new ArrayList<>();
+	
+	
 	
 	/**
 	 * Constructor for the class. 
 	 */
 	public AddingMachine() {
-		total = 0;	//not needed - included for clarity
+		total = 0;		//not needed - included for clarity
+		history.add(String.valueOf(total));	//add the first total to history
 	}
 	
 	/**
@@ -30,7 +39,7 @@ public class AddingMachine {
 	 * @return returns the total attribute from this class.
 	 */
 	public int getTotal() {
-		return 0;
+		return total;
 	}
 	
 	/**
@@ -38,7 +47,8 @@ public class AddingMachine {
 	 * @param value to add.
 	 */
 	public void add(int value) {
-		
+		total = total + value;
+		history.add(" + " + String.valueOf(value));
 	}
 	
 	/**
@@ -46,6 +56,8 @@ public class AddingMachine {
 	 * @param value to subtract
 	 */
 	public void substract (int value) {
+		total = total - value;
+		history.add(" - " + String.valueOf(value));
 		
 	}
 	
@@ -54,14 +66,23 @@ public class AddingMachine {
 	 * @return returns a string of the class attributes.
 	 */
 	public String toString() {
-		return "";
+		String result = "";
+		for (int startingIndex = 0; startingIndex < history.size(); startingIndex++)
+		{
+			result = result + history.get(startingIndex);
+		}
+		return result;
 	}
 	
 	/**
-	 * Method that clears the total.
+	 * Method that clears the total and the transaction history.
 	 */
 	public void clear() {
-	
+		
+		//reset total and the history array list to 0
+		total = 0;
+		history.clear();
+		history.add(String.valueOf(total));
 	}
 	
 }
